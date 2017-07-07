@@ -2,32 +2,13 @@
 <html lang="en">
 <?php
 include 'action/check-login.php';
-$usertoedit = $_SESSION['usertoedit'];
-include '../config/db_config.php';
 error_reporting(0);
-$sql = "SELECT * FROM patients WHERE patient_id = '$usertoedit'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-
-    while($row = $result->fetch_assoc()) {
-     $fname = $row['fullname'];
-	 $uhospital = $row['hospital'];
-	 $ugender = $row['gender'];
-	 $uic = $row['ic'];
-    }
-} else {
-	
-	//////
-
-}
-$conn->close();
 ?>
 <head>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eartistic System | Edit Staff</title>
+        <title>Eartistic System | New Impression</title>
         <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="../css/theme.css" rel="stylesheet">
@@ -49,7 +30,7 @@ include 'header.php';
         <div class="wrapper">
             <div class="container">
                 <div class="row">
-                    <?php
+                   <?php
 include 'sidemenu.php';
 ?>
             
@@ -60,75 +41,68 @@ include 'sidemenu.php';
                             <div class="module">
                                 <div class="module-head">
                                     <h3>
-                                        Edit Patient</h3>
+                                        New Impression</h3>
                                 </div>
 								<div class="module-body">
-	
-                                 <form class="form-horizontal row-fluid" action="action/save-patient.php" method="POST">
+								<?php
+								if(isset($_GET['in'])) {
+									print '
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										'.$_GET['in'].' 
+									</div>
+									';
+								}else{
+									
+								}
+								?>
+                                 <form class="form-horizontal row-fluid" action="action/new-stock.php" method="POST">
 										<div class="control-group">
-											<label class="control-label" for="basicinput">Full Name</label>
-											<div class="controls">
-												<input type="text" id="basicinput" placeholder="Full Name..." name="fullname" value="<?php echo"$fname"; ?>" required class="span8">
+										  <label class="control-label" for="basicinput2">Date</label>
+										  <div class="controls">
+												<input type="date" id="basicinput" placeholder="Date..." name="date" required class="span8">
 												
 											</div>
 										</div>
-
-
-										
-																				<div class="control-group">
-											<label class="control-label" for="basicinput">Hospital/ Walk in</label>
+                                        
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Item Description</label>
 											<div class="controls">
-												<input type="text" placeholder="hospital Address…" name="hospital" value="<?php echo"$uhospital"; ?>" required class="span8 tip">
+												<input type="text" placeholder="Product Name" name="itemdescription" required class="span8 tip">
 											</div>
 										</div>
-
-										<div class="control-group">
-											<label class="control-label" for="basicinput">Gender</label>
+                                        
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Quantity</label>
 											<div class="controls">
-												<select tabindex="1" data-placeholder="Select here.." name="gender" class="span8">
-												<?php
-												if ($ugender == "Male"){
-													print '
-													<option value="">Select one..</option>
-													<option selected value="Male">Male</option>
-													<option value="Female">Female</option>
-													
-													';
-												}else{
-													print '
-													<option value="">Select one..</option>
-													<option selected value="Male">Male</option>
-													<option selected value="Female">Female</option>
-													
-													';
-												}
-												?>
-													
-												</select>
+												<input type="number" placeholder="Opening Stock…" name="stock" required class="span8 tip">
 											</div>
 										</div>
-										
-										
-										<div class="control-group">
-											<label class="control-label" for="basicinput">IC Number</label>
+                                        
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Serial No.</label>
 											<div class="controls">
-												<input type="text" placeholder="ic Number…" name="ic" value="<?php echo"$uic"; ?>" required class="span8 tip">
+												<input type="text" placeholder="Serial No…" name="barcode" required class="span8 tip">
 											</div>
 										</div>
-
-			
-										
+                                        
+                                        <div class="control-group">
+										  <label class="control-label" for="basicinput2">Time</label>
+										  <div class="controls">
+												<input type="time" id="basicinput" placeholder="Time..." name="time" required class="span8">
+												
+											</div>
+										</div>																			
 
 										<div class="control-group">
 											<div class="controls">
-												<button type="submit" class="btn">Update Patient</button>
+												<button type="submit" class="btn">Add Stock</button>
 												<button type="reset" class="btn">Reset Form</button>
 											</div>
 										</div>
 									</form>
 									</div>
                             </div>
-
                        
                         </div>
                  
@@ -139,9 +113,11 @@ include 'sidemenu.php';
    
         </div>
 
-        <?php
-include 'footer.php';
-?>
+        <div class="footer">
+		<div class="container">
+			<b class="copyright">&copy; <?php echo date('Y') ?> Eartistic System - Developed by <a target="_blank" href="https://www.facebook.com/faizsupian">Faiz Supian</a> and  <a target="_blank" href="https://www.facebook.com/muhammadanuarr">Muhammad Anuar</a></b> All rights reserved.
+		</div>
+	</div>
         <script src="../scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
         <script src="../scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
         <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

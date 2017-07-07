@@ -30,7 +30,7 @@ $sql = "UPDATE products SET date='$date', item_description='$itemdescription', o
 
 
 if ($conn->query($sql) === TRUE) {
-    header("location:../stock_list.php");
+    header("location:../list_stock.php");
 } else {
      header("location:../edit_product.php");
 	 	 
