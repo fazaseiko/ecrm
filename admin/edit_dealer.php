@@ -2,18 +2,49 @@
 <html lang="en">
 <?php
 include 'action/check-login.php';
-error_reporting(0);
-?>
-<?php 
 include '../config/db_config.php';
-$id = $_SESSION['id'];
+error_reporting(0);
+
 ?>
 
+<?php
+include '../config/db_config.php';
+
+$id = $_GET['id'];
+$view = "SELECT * from dealer where dealer_id = '$id'";
+$result = $conn->query($view);
+$row = $result->fetch_assoc();
+
+if(isset($_POST['update'])){
+
+  $ID = $_GET['id'];
+
+  $dealer_name = $_POST['dealer_name'];
+  $dealer_address1 = $_POST['dealer_address1'];
+  $dealer_address2 = $_POST['dealer_address2'];
+  $dealer_address3 = $_POST['dealer_address3'];
+  
+  $insert = "UPDATE dealer set dealer_name = '$dealer_name', dealer_address1 = '$dealer_address1', dealer_address2 = '$dealer_address2' , dealer_address3 = '$dealer_address3' where dealer_id = '$id'";
+  
+  if($conn->query($insert)== TRUE){
+
+      echo "<SCRIPT LANGUAGE='JavaScript'>
+      window.location.href='list_dealer.php';
+            window.alert('Data has been succesfully saved!')
+            </SCRIPT>";     
+  }else{
+
+    echo "Ooppss cannot add data" . $conn->error;
+    header('location:edit_dealer.php');
+  }
+  $conn->close();
+}
+?>
 <head>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eartistic System| New Dealer</title>
+        <title>Eartistic System | Edit Dealer</title>
         <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="../css/theme.css" rel="stylesheet">
@@ -46,74 +77,42 @@ include 'sidemenu.php';
                             <div class="module">
                                 <div class="module-head">
                                     <h3>
-                                        New Dealer</h3>
+                                        Edit Dealer</h3>
                                 </div>
 								<div class="module-body">
-								<?php
-							
-								if (isset($_SESSION['newmwmber']) && $_SESSION['newmwmber'] == true) {
-	                             $susername = $_SESSION['susername'];
-								 $spassword = $_SESSION['suserpaa'];
-								 print '
-									
-									';
-                                 }else{
-                            
-                                  }
-								  
-								if(isset($_GET['in'])) {
-									print '
-									<div class="alert alert-success">
-										<button type="button" class="close" >×</button>
-										'.$_GET['in'].' 
-									</div>
-									';
-								}else{
-									
-								}
-								?>
+	
                                  <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" >
-  <table cellpadding="3" cellspacing="0">
-   
-   <tr>
+  <table width="90%" align="center" cellpadding="5" cellspacing="0">
+    <tr>
       <td><strong>Name</strong></td>
-      <td>
-      
-        <input type="text" name="name" id="surname" size="17" required>
-      
-      </td>
-      </tr>
-
-      <tr>
-      <td><strong>Address 1</strong></td>
       <td><label></label>
-      
-      <input name="address1" type="text" id="email" size="30" required></td> 
+        <span id="sprytextfield1">
+        <input type="text" name="dealer_name" id="surname" size="17" value="<?php echo $row['dealer_name'];?>"></span>
+      </tr>
+      <tr>
+      <td><strong>Address 1 </strong></td>
+      <td><label></label>
+      <span id="sprytextfield6">
+      <input name="dealer_address1" type="text" id="email" size="30"  value="<?php echo $row['dealer_address1'];?>"/></span></td> 
     </tr>
     <tr>
       <td><strong>Address 2</strong></td>
       <td><label></label>
-      
-      <input name="address2" type="text" id="email" size="30" ></td> 
+      <span id="sprytextfield6">
+      <input name="dealer_address2" type="text" id="email" size="30"  value="<?php echo $row['dealer_address2'];?>"/></span></td> 
     </tr>
     <tr>
       <td><strong>Address 3</strong></td>
       <td><label></label>
-      
-      <input name="address3" type="text" id="email" size="30" ></td> 
+      <span id="sprytextfield6">
+      <input name="dealer_address3" type="text" id="email" size="30"  value="<?php echo $row['dealer_address3'];?>"/></span></td> 
     </tr>
-    
-           <br>
-        
-
     <tr>
       <td>&nbsp;</td>
-      <td><input type="submit" name="save" id="submit" value="Add"  style="cursor:pointer" />
+      <td><input type="submit" name="update" id="submit" value="Update"  style="cursor:pointer" />
         <input type="reset" name="reset" id="reset" value="Reset" style="cursor:pointer" /></td>
     </tr>
   </table>
-
-  <br>
 </form>
 									</div>
                             </div>
@@ -140,34 +139,3 @@ include 'footer.php';
         <script src="../scripts/common.js" type="text/javascript"></script>
       
     </body>
-    
-    <?php
-
-if(isset($_POST['save'])){
-  $name = $_POST['name'];
-  $address1 = $_POST['address1'];
-  $address2 = $_POST['address2'];
-  $address3 = $_POST['address3'];
-  
-  $sql = "INSERT INTO dealer (dealer_name, dealer_address1, dealer_address2, dealer_address3)
-      VALUES
-      ('$name','$address1','$address2','$address3')";
-    
-
-  $result = mysqli_query($conn,$sql);
-
-  if($result){
-    echo "<SCRIPT LANGUAGE='JavaScript'>
-            window.alert('Data has been succesfully saved!')
-            window.location.href='new_invoice_dealer.php';
-            </SCRIPT>";
-  }
-  else {
-    echo "<SCRIPT LANGUAGE='JavaScript'>
-            window.alert('Data NOT succesfully saved!')
-            window.location.href='new_dealer.php';
-            </SCRIPT>";
-  }
-}
-
-?>

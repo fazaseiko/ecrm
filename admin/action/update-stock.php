@@ -26,7 +26,7 @@ include '../../config/db_config.php';
 
 //$sql = "UPDATE products SET name='$product_name', buying_price='$bprice', selling_price='$sprice', stock_level='$lowstock', open_Stock='$opstock', current_stock='$cust', barcode='$barcode', category='$prodcate', unit='$produnit', expire_date='$exdate', expire_month='$exmonth', expire_year='$exyear' WHERE product_id='$producttoedit'";
 
-$sql = "UPDATE products SET date='$date', item_description='$itemdescription', open_stock='$opstock', barcode='$barcode', person_in_charge='$personincharge', time='$time' WHERE product_id='$producttoedit'";
+$sql = "UPDATE products SET date='$date', item_description='$itemdescription', current_stock='$opstock', barcode='$barcode', person_in_charge='$personincharge', time='$time' WHERE product_id='$producttoedit'";
 
 
 if ($conn->query($sql) === TRUE) {

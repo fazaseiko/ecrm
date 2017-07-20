@@ -35,13 +35,13 @@ include 'sidemenu.php';
 ?>
             
                     <div class="span9">
-                        <div class="content">
+                         <div>
 
        
                             <div class="module">
                                 <div class="module-head">
                                     <h3>
-                                        New Impression</h3>
+                                        New Repair</h3>
                                 </div>
 								<div class="module-body">
 								<?php
@@ -56,235 +56,182 @@ include 'sidemenu.php';
 									
 								}
 								?>
-                                 <form class="form-horizontal row-fluid" action="action/new-stock.php" method="POST">
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">DATE</label>
+                                 <form action="action/new-stock.php" method="POST">
+										<div >
+                                        <span>
+										<label >Name</label>										  
+										<input type="date" placeholder="Date..." name="date" required>
+										</span>
+                                         <span>
+                                            <label >Name</label>										  
+											<input type="date" laceholder="Date..." name="date" required>												
+										</span>
+                                            
+                                            
+										</div>
+                                        
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Item Description</label>
+											<div class="controls">
+												<input type="text" placeholder="Product Name" name="itemdescription" required class="span8 tip">
+											</div>
+										</div>
+                                        
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Quantity</label>
+											<div class="controls">
+												<input type="number" placeholder="Opening Stock…" name="stock" required class="span8 tip">
+											</div>
+										</div>
+                                        
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Serial No.</label>
+											<div class="controls">
+												<input type="text" placeholder="Serial No…" name="barcode" required class="span8 tip">
+											</div>
+										</div>
+                                        
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Person In Charge</label>
+											<div class="controls">
+												<select tabindex="1" data-placeholder="Select here.." name="personincharge" class="span8">
+													<option value="">Select one..</option>
+													<?php
+													include '../config/db_config.php';
+													$sql = "SELECT * FROM person_in_charge WHERE shop = '$SEshopno' or shop = 'ALL' ORDER BY name";
+                                                    $result = $conn->query($sql);
+
+                                                    if ($result->num_rows > 0) {
+
+                                                    while($row = $result->fetch_assoc()) {
+                                                     print '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                                                       }
+                                                     } else {
+
+                                                     }
+                                                     $conn->close();
+													?>
+												</select>
+											</div>
+										</div>
+                                        
+                                        <div class="control-group">
+										  <label class="control-label" for="basicinput2">Time</label>
 										  <div class="controls">
-												<input type="date" id="basicinput" placeholder="Date..." name="categories_date" required class="span8">
+												<input type="time" id="basicinput" placeholder="Time..." name="time" required class="span8">
 												
 											</div>
 										</div>
-                                        
-                                        <div class="control-group">
-											<label class="control-label" for="basicinput">NAME</label>
+
+										<?php /*?><div class="control-group">
+											<label class="control-label" for="basicinput">Buying Price</label>
 											<div class="controls">
-												<input type="text" placeholder="Full Name" name="categories_name" required class="span8 tip">
-											</div>
-                                            
-                                            <label class="control-label" for="basicinput">I/C NO</label>
-											<div class="controls">
-												<input type="text" placeholder="IC Number" name="categories_ic" required class="span8 tip">
-											</div>
-                                            
-										</div>
-                                        
-                                        <div class="control-group">
-											
-										</div>
-                                        
-                                        <div class="control-group">
-											<label class="control-label" for="basicinput">HOSPITAL</label>
-											<div class="controls">
-												<input type="text" placeholder="Hospital" name="categories_hospital" required class="span8 tip">
+												<div class="input-append">
+													<input type="number" placeholder="Buying Price" name="buyingprice" required class="span8"><span class="add-on"><?php echo"$SEshopcurrency"; ?></span>
+				                                 
+												</div>
+
 											</div>
 										</div>
-                                        
-                                        <div class="control-group">
-										  <label class="control-label" for="basicinput2">AUDIOLOGIST IN CHARGE</label>
-										  <div class="controls">
-											<select name="categories_audiologist" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="Dr Shasa Aziz" >Dr Shasa Aziz </option>
-        										<option value="Tasnim Hazizan" >Tasnim Hazizan</option>
-        										<option value="Afiqah Amirullah" >Afiqah Amirullah</option>
-        										<option value="Amar Ruzai" >Amar</option>
-        										<option value="Zahidah Zainal" >Zahidah Zainal</option>
-        										<option value="Faiz Salleh" >Faiz</option>
-      											</select>
+										
+																				<div class="control-group">
+											<label class="control-label" for="basicinput">Selling Price</label>
+											<div class="controls">
+												<div class="input-append">
+													<input type="number" placeholder="Selling Price" name="sellingprice"  required class="span8"><span class="add-on"><?php echo"$SEshopcurrency"; ?></span>
+				                                 
+												</div>
+
+											</div>
+										</div>
+										
+										<div class="control-group">
+											<label class="control-label" for="basicinput">Low stock level</label>
+											<div class="controls">
+												<input type="number" id="basicinput" placeholder="Low stock level..." name="stocklevel" required class="span8">
+												
 											</div>
 										</div>																			
-
+										
 										<div class="control-group">
-											<label class="control-label" for="basicinput">REQUIRED DATE</label>
+											<label class="control-label" for="basicinput">Product Unit</label>
 											<div class="controls">
-												<input type="text" placeholder="Required Date" name="categories_requireddate" required class="span8 tip">
+												<select tabindex="1" data-placeholder="Select here.." name="productunit" required class="span8">
+													<option value="">Select one..</option>
+                                                     <?php
+													include '../config/db_config.php';
+													$sql = "SELECT * FROM product_units WHERE shop = '$SEshopno' or shop = 'ALL' ORDER BY name";
+                                                    $result = $conn->query($sql);
+
+                                                    if ($result->num_rows > 0) {
+
+                                                    while($row = $result->fetch_assoc()) {
+                                                     print '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                                                       }
+                                                     } else {
+
+                                                     }
+                                                     $conn->close();
+													?>
+												</select>
 											</div>
 										</div>
 
 										<div class="control-group">
-										  <label class="control-label" for="basicinput2">SOFT LEFT STYLE</label>
-										  <div class="controls">
-											<select name="categories_soft_left_style" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="FULL SHELL CARVED" >FULL SHELL CARVED</option>
-        										<option value="HALF SHELL CARVED CANAL" >HALF SHELL CARVED CANAL</option>
-        										<option value="FULL SHELL (HIGH POWERED)" >FULL SHELL (HIGH POWERED)</option>
-        										<option value="FULL SHELL (PEADIATRIC, DOUBLE DIP)" >FULL SHELL (PEADIATRIC, DOUBLE DIP)</option>
-      											</select>
-											</div>
-										</div>		
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">SOFT LEFT TUBING</label>
-										  <div class="controls">
-											<select name="categories_soft_left_tubing" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="STANDARD WITHOUT LOCK" >STANDARD WITHOUT LOCK</option>
-        										</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">SOFT LEFT VENT</label>
-										  <div class="controls">
-											<select name="categories_soft_left_vent" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="NO VENT" >NO VENT</option>
-        										<option value="0.8 mm" >0.8 mm</option>
-        										<option value="1.0 mm" >1.0 mm</option>
-        										<option value="1.4 mm" >1.4 mm</option>
-        										<option value="2.0 mm" >2.0 mm</option>
-      											</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">SOFT RIGHT STYLE</label>
-										  <div class="controls">
-											<select name="categories_soft_right_style" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="FULL SHELL CARVED" >FULL SHELL CARVED</option>
-        										<option value="HALF SHELL CARVED CANAL" >HALF SHELL CARVED CANAL</option>
-        										<option value="FULL SHELL (HIGH POWERED)" >FULL SHELL (HIGH POWERED)</option>
-        										<option value="FULL SHELL (PEADIATRIC, DOUBLE DIP)" >FULL SHELL (PEADIATRIC, DOUBLE DIP)</option>
-      											</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">SOFT RIGHT TUBING</label>
-										  <div class="controls">
-											<select name="categories_soft_right_tubing" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="STANDARD WITHOUT LOCK" >STANDARD WITHOUT LOCK</option>
-        										</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">SOFT RIGHT VENT</label>
-										  <div class="controls">
-											<select name="categories_soft_right_vent" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="NO VENT" >NO VENT</option>
-        										<option value="0.8 mm" >0.8 mm</option>
-        										<option value="1.0 mm" >1.0 mm</option>
-        										<option value="1.4 mm" >1.4 mm</option>
-        										<option value="2.0 mm" >2.0 mm</option>
-      											</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">HARD LEFT STYLE</label>
-										  <div class="controls">
-											<select name="categories_hard_left_style" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="FULL SHELL CARVED" >FULL SHELL CARVED</option>
-        										<option value="HALF SHELL CARVED CANAL" >HALF SHELL CARVED CANAL</option>
-        										<option value="CANAL" >CANAL</option>
-        										<option value="CANAL LOCK" >CANAL LOCK</option>
-      											</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">HARD LEFT TUBING</label>
-										  <div class="controls">
-											<select name="categories_hard_right_tubing" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="STANDARD WITHOUT LOCK" >STANDARD WITHOUT LOCK</option>
-        										</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">HARD LEFT VENT</label>
-										  <div class="controls">
-											<select name="categories_hard_left_vent" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="NO VENT" >NO VENT</option>
-        										<option value="0.8 mm" >0.8 mm</option>
-        										<option value="1.0 mm" >1.0 mm</option>
-        										<option value="1.4 mm" >1.4 mm</option>
-        										<option value="2.0 mm" >2.0 mm</option>
-      											</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">HARD LEFT OTHER OPTIONS</label>
-										  <div class="controls">
-											<select name="categories_hard_left_other" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="PULL OUT STRING" >PULL OUT STRING</option>
-        										</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">HARD RIGHT STYLE</label>
-										  <div class="controls">
-											<select name="categories_hard_right_style" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="FULL SHELL CARVED" >FULL SHELL CARVED</option>
-        										<option value="HALF SHELL CARVED CANAL" >HALF SHELL CARVED CANAL</option>
-        										<option value="CANAL" >CANAL</option>
-        										<option value="CANAL LOCK" >CANAL LOCK</option>
-      											</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">HARD RIGHT TUBING</label>
-										  <div class="controls">
-											<select name="categories_hard_right_tubing" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="STANDARD WITHOUT LOCK" >STANDARD WITHOUT LOCK</option>
-        										</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">HARD RIGHT VENT</label>
-										  <div class="controls">
-											<select name="categories_hard_right_vent"> 
-        										<option value="" selected="selected" ></option>
-        										<option value="NO VENT" >NO VENT</option>
-        										<option value="0.8 mm" >0.8 mm</option>
-        										<option value="1.0 mm" >1.0 mm</option>
-        										<option value="1.4 mm" >1.4 mm</option>
-        										<option value="2.0 mm" >2.0 mm</option>
-      											</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-										  <label class="control-label" for="basicinput2">HARD RIGHT OTHER OPTIONS</label>
-										  <div class="controls">
-											<select name="categories_hard_right_other" > 
-        										<option value="" selected="selected" ></option>
-        										<option value="PULL OUT STRING" >PULL OUT STRING</option>
-        										</select>
-											</div>
-										</div>
-
-										<div class="control-group">
-											<label class="control-label" for="basicinput">OTHER REMARKS</label>
+											<label class="control-label" for="basicinput">Expire Date</label>
 											<div class="controls">
-												<input type="text" placeholder="Remarks" name="categories_other" required class="span8 tip">
+												  <select tabindex="1" data-placeholder="Select here.." name="date" required class="span2">
+													<option value="">Date</option>
+													<?php 
+                                                    $x = 1; 
+
+                                                    while($x <= 31) {
+                                         
+												     if ($x < 10) {
+														   $x = "0$x";
+													 print '<option value="'.$x.'">'.$x.'</option>';
+													   }else{
+													 print '<option value="'.$x.'">'.$x.'</option>';
+													   }
+                                                    $x++;
+                                                      } 
+                                                        ?>
+													</select>
+													
+													<select tabindex="1" data-placeholder="Select here.." name="month" required class="span2">
+													<option value="">Month</option>
+													<?php 
+                                                    $x = 1; 
+
+                                                    while($x <= 12) {
+                                                       if ($x < 10) {
+														   $x = "0$x";
+													 print '<option value="'.$x.'">'.$x.'</option>';
+													   }else{
+													 print '<option value="'.$x.'">'.$x.'</option>';
+													   }
+													   
+                                                    $x++;
+                                                      } 
+                                                        ?>
+													</select>
+													
+													<select tabindex="1" data-placeholder="Select here.." name="year" class="span2">
+													<option value="">Year</option>
+													<?php 
+                                                    $x = date('Y'); 
+                                                    $yr = 20;
+													$y2 = $x + $yr;
+                                                    while($x <= $y2) {
+                                         
+													 print '<option value="'.$x.'">'.$x.'</option>';
+                                                    $x++;
+                                                      } 
+                                                        ?>
+													</select>
 											</div>
-										</div>
+										</div><?php */?>
+										
 
 										<div class="control-group">
 											<div class="controls">
@@ -295,6 +242,7 @@ include 'sidemenu.php';
 									</form>
 									</div>
                             </div>
+
                        
                         </div>
                  

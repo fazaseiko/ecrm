@@ -40,10 +40,10 @@ include 'sidemenu.php';
                         <div class="content">
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
-                                    <a href="#" class="btn-box big span6"><i class=" icon-shopping-cart"></i><b><?php echo number_format($mypr1); ?></b>
+                                    <a href="list_stock.php" class="btn-box big span6"><i class=" icon-shopping-cart"></i><b><?php echo number_format($mypr1); ?></b>
                                         <p class="text-muted">
                                             Registered Products</p>
-                                    </a><a href="#" class="btn-box big span6"><i class="icon-user"></i><b><?php echo number_format($myus1); ?></b>
+                                    </a><a href="list_patient.php" class="btn-box big span6"><i class="icon-user"></i><b><?php echo number_format($myus1); ?></b>
                                         <p class="text-muted">
                                             Registered Patients</p>
                                     </a><?php /*?><a href="#" class="btn-box big span4"><i class="icon-money"></i><b><?php echo number_format($mysum); ?> <?php echo"$SEshopcurrency"; ?></b>
@@ -72,7 +72,7 @@ include 'sidemenu.php';
 																			print '
 									 <div class="alert alert-success">
 										<button type="button" class="close" data-dismiss="alert">×</button>
-										All products below the stock level will be shown here.
+										All products below five(5) will be shown here.
 									</div>';
 									}
 
@@ -89,7 +89,7 @@ include 'sidemenu.php';
 																			print '
 									 <div class="alert alert-success">
 										<button type="button" class="close" data-dismiss="alert">×</button>
-										All expired products will be shown here.
+										_
 									</div>';
 									}
 								}
@@ -108,7 +108,7 @@ include 'sidemenu.php';
                                  <?php
 								 include '../config/db_config.php';
 								 
-								 $sql = "SELECT * FROM products WHERE shop_id = '$SEshopno'";
+								 $sql = "SELECT * FROM products ORDER BY date DESC LIMIT 3";
                                  $result = $conn->query($sql);
 
                                  if ($result->num_rows > 0) {
@@ -151,7 +151,7 @@ include 'sidemenu.php';
                                                     '.$row['item_description'].'
                                                 </td>
 												<td>
-                                                    '.$row['open_stock'].'
+                                                    '.$row['current_stock'].'
                                                 </td>
 												<td>
                                                     '.$row['barcode'].'

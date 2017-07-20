@@ -75,7 +75,7 @@ include 'sidemenu.php';
         $i=1;
         		
 		include '../config/db_config.php';								 
-		$sql = "SELECT * FROM invoice";
+		$sql = "SELECT * FROM invoice_patient";
         $result = $conn->query($sql);
 		
 		
@@ -91,7 +91,7 @@ include 'sidemenu.php';
             <td><a href="invoice.php?id=<?php echo md5($row['id']);?>" target="_blank" > invoice </a> /
             <a href="deliveryorder.php?id=<?php echo md5($row['id']);?>" target="_blank" > delivery order</a> /
             <a href="paymentvoucher.php?id=<?php echo md5($row['id']);?>" target="_blank" > official receipt</a> / 
-            <a href="dealerdelete.php?id=<?php echo md5($row['id']);?>" onclick="return confirm('Are you sure you want to delete?')"> delete</a>
+            <a href="delete_list_patient_invoice.php?id=<?php echo md5($row['id']);?>" onclick="return confirm('Are you sure you want to delete?')"> delete</a>
             </td>
             
           

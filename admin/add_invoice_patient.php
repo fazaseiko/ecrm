@@ -8,7 +8,7 @@ error_reporting(0);
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eartistic System | New Impression</title>
+        <title>Eartistic System | New Patient Invoice</title>
         <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="../css/theme.css" rel="stylesheet">
@@ -32,21 +32,21 @@ include 'header.php';
                 <div class="row">
                    <?php
 include 'sidemenu.php';
-?>
+?>         
 
 <?php
-									include '../config/db_config.php';
+		include '../config/db_config.php';
 									$username = $_SESSION['username'];
 									$id = $_SESSION['id'];
 									$id = $_GET['id'];
-									$view = "SELECT * from patient where md5(patient_id) = '$id'";
-									$result = $conn->query($view);
-									$row = $result->fetch_assoc();
+//$view = "SELECT * from patient where md5(patient_id) = '$id'";	
+//$views = "SELECT * FROM sales WHERE md5(patient_id) = '$id'";	
+$views = "SELECT * from patient WHERE md5(patient_id) = '$id'";							
+									$results = $conn->query($views);
+									$rows = $results->fetch_assoc();
 ?>
-            
-                    <div class="span9">
-                        <div class="content">
-
+<div class="span10">
+          <div class="content">
        
                             <div class="module">
                                 <div class="module-head">
@@ -54,120 +54,123 @@ include 'sidemenu.php';
                                         New Patient Invoice</h3>
                                 </div>
 								<div class="module-body">
-								<?php
-								if(isset($_GET['in'])) {
-									print '
-									<div class="alert alert-success">
-										<button type="button" class="close" data-dismiss="alert">×</button>
-										'.$_GET['in'].' 
-									</div>
-									';
-								}else{
-								}
-								?>
-                                 <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" >
-  <table cellpadding="3" cellspacing="0">
-   
-    <tr>
-      <td><strong>Bill to (Name)</strong></td>
-      <td><input name="invoice_name" value="<?php echo $row['patient_name']; ?>"    />
-<td><strong>Bill to (IC)</strong></td>
-      <td><input name="invoice_ic" value="<?php echo $row['patient_ic']; ?>"    />
-      <td><strong>Bill to (Hospital)</strong></td>
-      <td><input name="invoice_hospital" value="<?php echo $row['patient_hospital']; ?>"/>
-</td>
-
+								
+<form action="" method="post" name="form1">
+<table cellspacing="0" cellpadding="1">
+<tbody>
+<tr>
+<td><strong> Bill to (Name) </strong></td>
+<td><input name="invoice_name" size="20" type="text" value="<?php echo $rows['patient_name']; ?>" /></td>
+<td><strong> IC </strong></td>
+<td><input name="invoice_ic" size="20" type="text" value="<?php echo $rows['patient_ic']; ?>" /></td>
+<td><strong> Hospital </strong></td>
+<td><input name="invoice_hospital" size="20" type="text" value="<?php echo $rows['patient_hospital']; ?>" /></td>
 </tr>
 <tr>
-<td><strong>Date</strong></td>
-      <td><input name="invoice_date" type="date" size="20" required/></td>
-
-<td><strong>Reference No.</strong></td>
-      <td><input name="invoice_reference" type="text" size="20"/></td>
-
-    
-      <td><strong>Audiologist in Charge</strong></td>
-      <td><label><select name="invoice_audio" required> 
-        <option value="" selected="selected" ></option>
-        <option value="Dr Shasa Aziz" >Dr Shasa Aziz </option>
-        <option value="Tasnim Hazizan" >Tasnim Hazizan</option>
-        <option value="Afiqah Amirullah" >Afiqah Amirullah</option>
-        <option value="Amar Ruzai" >Amar</option>
-        <option value="Zahidah Zainal" >Zahidah Zainal</option>
-        <option value="Faiz Salleh" >Faiz</option>
-      </select></label></td>
- </tr>
-      <tr>
-      <td><strong>Terms of Payment</strong></td>
-      <td><label><select name="invoice_top" required> 
-        <option value="" selected="selected" ></option>
-        <option value="Cash" >Cash</option>
-        <option value="Credit">Credit</option>
-        </select></label></td>
-           <br>
-
-<td><strong>Payment Detail</strong></td>
-      <td><label><select name="invoice_paydetail" required> 
-        <option value="" selected="selected" ></option>
-        <option value="Deposit" >DEPOSIT</option>
-        <option value="Full" >FULL</option>
-        </select></label></td>
-
-           <td><strong>Description</strong></td>
-      <td><label><select name="invoice_description" required> 
-        <option value="" selected="selected" ></option>
-        <option value="SONIC PEP 20 BTE" >SONIC PEP 20 BTE</option>
-        <option value="SONIC PEP 20 BTEP" >SONIC PEP 20 BTEP</option>
-        </select></label></td>
-
-
-
+<td><strong> Date </strong></td>
+<td><input name="invoice_date" required="" size="20" type="date" /></td>
+<td><strong> Reference No. </strong></td>
+<td><input name="invoice_reference" size="20" type="text" /></td>
+<td><strong> Audiologist in Charge </strong></td>
+<td><label><select name="invoice_audio" required>
+<option value="Dr Shasa Aziz">Dr Shasa Aziz</option>
+<option value="Tasnim Hazizan">Tasnim Hazizan</option>
+<option value="Afiqah Amirullah">Afiqah Amirullah</option>
+<option value="Amar Ruzai">Amar</option>
+<option value="Zahidah Zainal">Zahidah Zainal</option>
+<option value="Faiz Salleh">Faiz</option>
+</select></label></td>
 </tr>
-
 <tr>
-
-<td><strong>Quantity</strong></td>
-      <td><input name="invoice_quantity" type="number" size="10" required/></td>
-
-
-<td><strong>S/N</strong></td>
-      <td><input name="invoice_sn" type="text" size="20" required/></td>
-
-      <td><strong>Unit Price</strong></td>
-      <td><input name="invoice_price" type="text" size="20" required/></td>
-
-      </tr>
-
+<td><strong> Terms of Payment </strong></td>
+<td><label><select name="invoice_top" required>
+<option value="Cash">Cash</option>
+<option value="Credit">Credit</option>
+</select></label></td>
+<td><strong> Payment Detail </strong></td>
+<td><label><select name="invoice_paydetail" required>
+<option value="Deposit">DEPOSIT</option>
+<option value="Full">FULL</option>
+</select></label></td>
+</tr>
 <tr>
+<td><strong> List Product(s): </strong></td>
+</tr>
+</tbody>
+</table>
 
-<td><strong>Total</strong></td>
-      <td><input name="invoice_total" type="text" size="20" required/></td>
+<table width="634" border="1">
+<tbody>
+<tr>
+<td>No</td>
+<td>Description</td>
+<td>Quantity</td>
+<td>S/N</td>
+<td>Unit Price</td>
+<td>Total</td>
+</tr>
+<?php
+        $i=1;
+        include '../config/db_config.php';
+		//$username = $_SESSION['username'];
+		//$id = $_SESSION['id'];
+		$ids = $_GET['id'];
+								 
+		//$sql = "SELECT patient.patient_id, patient.patient_name,patient.patient_hospital,sales.product_name,sales.quantity FROM patient INNER JOIN sales ON patient.patient_id=sales.patient_id WHERE md5(patient_id) = '$id'";
+		$sql = "SELECT * FROM sales WHERE md5(patient_id) = '$ids'";
+        $result = $conn->query($sql);
+         while ($row=mysqli_fetch_array($result)) {             
+               
+        ?>
+                                    
+        <tr align="left">
+            
+            <td><?php echo $i++; ?></td>
+            <td><?php echo $row['product_name']; ?></td>
+            <td><?php echo $row['amount']; ?></td>
+            <td><?php echo $row['serial_number']; ?></td>
+            <td><input name="data1[invoice_price]" type="text"/></td>
+            <td><input name="data2[invoice_total]" type="text"/></td>
+            
+            </td>
+            </tr>
 
-<td><strong>Accessories</strong></td>
-      <td><label><select name="invoice_accessories" required> 
-        <option value="" selected="selected" ></option>
-        <option value="MNR" >MNR</option>
-        <option value="BTE" >BTE</option>
-        <option value="CUSTOM" >CUSTOM</option>
-        </select></label></td>
+                                            
+      <?php } ?>
+</tbody>
+</table>
+<table cellspacing="0" cellpadding="1">
+<tbody>
+<tr>
+<td><strong> Other: </strong></td>
+</tr>
+<tr>
+<td><strong> Accessories </strong></td>
+<td><textarea cols="40" form="form1" name="invoice_accessories" rows="5">-Battery
+-Battery Tester
+-Drying Jar
+-Drying Capsules
+-Air Puffer
+-Cleaning Tools
+-Pouch
+-User Guide</textarea></td>
+</tr>
+<tr>
+<td><strong> SubTotal </strong></td>
+<td><input name="invoice_subtotal" required="" size="20" type="text" /></td>
+</tr>
+<tr>
+<td><input name="save" type="submit" value="Add" /></td>
+</tr>
+</tbody>
+</table>
 
-
-
-      
-        
-
-    <tr>
-      <td>&nbsp;</td>
-      <td><input type="submit" name="save" id="submit" value="Add"  style="cursor:pointer" /></td>
-    </tr>
-  </table>
-
-  <br>
 </form>
-									</div>
+
+							  </div>
                             </div>
                        
-                        </div>
+        </div>
                  
                     </div>
     
@@ -205,11 +208,11 @@ if(isset($_POST['save'])){
   $invoice_description = $_POST['invoice_description'];
   $invoice_quantity = $_POST['invoice_quantity'];
   $invoice_sn = $_POST['invoice_sn'];
-  $invoice_price = $_POST['invoice_price'];
-  $invoice_total = $_POST['invoice_total'];
+  $invoice_price = $_POST['data1[invoice_price]'];
+  $invoice_total = $_POST['data2[invoice_total]'];
   $invoice_accessories = $_POST['invoice_accessories'];
   
-  $sql = "INSERT INTO invoice (invoice_name, invoice_ic, invoice_hospital, invoice_date, invoice_reference,   invoice_audio, invoice_top, invoice_paydetail, invoice_description, invoice_quantity, invoice_sn, invoice_price, invoice_total, invoice_accessories)
+  $sql = "INSERT INTO invoice_patient (invoice_name, invoice_ic, invoice_hospital, invoice_date, invoice_reference,   invoice_audio, invoice_top, invoice_paydetail, invoice_description, invoice_quantity, invoice_sn, invoice_price, invoice_total, invoice_accessories)
       VALUES
       ('$invoice_name', '$invoice_ic', '$invoice_hospital', '$invoice_date', '$invoice_reference', '$invoice_audio', '$invoice_top', '$invoice_paydetail', '$invoice_description', '$invoice_quantity', '$invoice_sn', '$invoice_price', '$invoice_total', '$invoice_accessories' )";
     

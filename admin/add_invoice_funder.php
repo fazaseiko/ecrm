@@ -8,7 +8,7 @@ error_reporting(0);
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eartistic System | New Impression</title>
+        <title>Eartistic System | New Funder Invoice</title>
         <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="../css/theme.css" rel="stylesheet">
@@ -39,7 +39,7 @@ include 'sidemenu.php';
 									$username = $_SESSION['username'];
 									$id = $_SESSION['id'];
 									$id = $_GET['id'];
-									$view = "SELECT * from funder where md5(id) = '$id'";
+									$view = "SELECT * from funder where md5(funder_id) = '$id'";
 									$result = $conn->query($view);
 									$row = $result->fetch_assoc();
 ?>
@@ -70,11 +70,11 @@ include 'sidemenu.php';
    
     <tr>
       <td><strong>Bill to (Name)</strong></td>
-      <td><input name="invoice_name" value="<?php echo $row['patient_name']; ?>"    />
-<td><strong>Bill to (IC)</strong></td>
-      <td><input name="invoice_ic" value="<?php echo $row['patient_ic']; ?>"    />
-      <td><strong>Bill to (Hospital)</strong></td>
-      <td><input name="invoice_hospital" value="<?php echo $row['patient_hospital']; ?>"/>
+      <td><input name="invoice_name" value="<?php echo $row['funder_name']; ?>"  size="20"   />
+	  <td><strong>Address 1</strong></td>
+      <td><input name="invoice_ic" value="<?php echo $row['funder_address1']; ?>"  size="20"   />
+      <td><strong>Address 2</strong></td>
+      <td><input name="invoice_hospital" value="<?php echo $row['funder_address2']; ?>" size="20" />
 </td>
 
 </tr>
@@ -219,13 +219,13 @@ if(isset($_POST['save'])){
   if($result){
     echo "<SCRIPT LANGUAGE='JavaScript'>
             window.alert('Data has been succesfully saved!')
-            window.location.href='list_invoice_funder.php';
+            window.location.href='list_invoice_patient.php';
             </SCRIPT>";
   }
   else {
     echo "<SCRIPT LANGUAGE='JavaScript'>
             window.alert('Data NOT succesfully saved!')
-            window.location.href='add_invoice_funder.php';
+            window.location.href='add_invoice_patient.php';
             </SCRIPT>";
   }
 }

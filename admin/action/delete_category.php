@@ -4,7 +4,7 @@ $category = $_GET['ref'];
 
 include '../../config/db_config.php';
 
-$sql = "DELETE FROM person_in_charge WHERE name ='$category' and shop = '$SEshopno'";
+$sql = "DELETE FROM person_in_charge WHERE name ='$category'";
 
 if ($conn->query($sql) === TRUE) {
    header("location:../product_categories.php");

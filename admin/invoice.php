@@ -3,9 +3,9 @@
 include '../config/db_config.php';
 								 
 		
-
+$i=1;
 $id = $_GET['id'];
-$view = "SELECT * from invoice where md5(id) = '$id'";
+$view = "SELECT * from invoice_patient where md5(id) = '$id'";
 $result = $conn->query($view);
 $row = $result->fetch_assoc();
 
@@ -92,7 +92,7 @@ $row = $result->fetch_assoc();
 				</thead>
 				<tbody>
 					<tr>
-						<td><center>1</center></td>
+						<td><center><?php echo $i++; ?></center></td>
       </div>
 						<td><?php echo $row['invoice_description']; ?></td>
 						<td><center><?php echo $row['invoice_quantity']; ?></center></td>
@@ -100,9 +100,9 @@ $row = $result->fetch_assoc();
 						<td><center><?php echo $row['invoice_total']; ?></center></td>
 						
 					</tr>
+                    
 				</tbody>
 			</table>
-			<a class="add">+</a>
 			
 			<table class="balance">
 

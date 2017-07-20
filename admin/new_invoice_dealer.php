@@ -84,9 +84,9 @@ include 'sidemenu.php';
         <tr align="center">
             
             <td><?php echo $i++; ?></td>
-            <td><?php echo $row['dealername']; ?></td>
-            <td><?php echo $row['dealeraddress']; ?></td>
-            <td><a href="add_invoice_funder.php?id=<?php echo md5($row['id']);?>"> new invoice </a></td>
+            <td><?php echo $row['dealer_name']; ?></td>
+            <td><?php echo $row['dealer_address1']; ?></td>
+            <td><a href="add_invoice_dealer.php?id=<?php echo md5($row['dealer_id']);?>"> new invoice </a></td>
             
             </td>
             </tr>

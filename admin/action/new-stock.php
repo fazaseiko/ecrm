@@ -26,13 +26,13 @@ include '../../config/db_config.php';
 //$sql = "INSERT INTO products (product_id, shop_id, name, buying_price, selling_price, stock_level, open_stock, current_stock, barcode, category, unit, expire_date, expire_month, expire_year)
 //VALUES ('$product_id', '$SEshopno', '$product_name', '$bprice', '$sprice', '$lowstock', '$opstock', '$opstock', '$barcode', '$prodcate', '$produnit', '$exdate', '$exmonth', '$exyear')";
 
-$sql = "INSERT INTO products (product_id, shop_id, date, item_description, open_stock, barcode, person_in_charge, time)
+$sql = "INSERT INTO products (product_id, shop_id, date, item_description, current_stock, barcode, person_in_charge, time)
 VALUES ('$product_id', '$SEshopno', '$date', '$itemdescription','$opstock', '$barcode', '$personincharge', '$time')";
 
 if ($conn->query($sql) === TRUE) {
-    header("location:../new_stock.php?in=Product $product_name have been registered");
+    header("location:../list_stock.php?in=Product $product_name have been registered");
 } else {
-    header("location:../new_stock.php?err=Could not register product $product_name");
+    header("location:../list_stock.php?err=Could not register product $product_name");
 }
 
 $conn->close();

@@ -69,7 +69,7 @@ include 'sidemenu.php';
                                  <?php
 								 include '../config/db_config.php';
 								 
-								 $sql = "SELECT * FROM person_in_charge WHERE shop = '$SEshopno' ORDER BY name";
+								 $sql = "SELECT * FROM person_in_charge ORDER BY name";
                                  $result = $conn->query($sql);
 
                                  if ($result->num_rows > 0) {

@@ -45,7 +45,7 @@ include 'sidemenu.php';
                                  <?php
 								 include '../config/db_config.php';
 								 
-								 $sql = "SELECT * FROM products WHERE shop_id = '$SEshopno'";
+								 $sql = "SELECT * FROM products";
                                  $result = $conn->query($sql);
 
                                  if ($result->num_rows > 0) {
@@ -90,7 +90,7 @@ include 'sidemenu.php';
                                                     '.$row['item_description'].'
                                                 </td>
 												<td>
-                                                    '.$row['open_stock'].'
+                                                    '.$row['current_stock'].'
                                                 </td>
 												<td>
                                                     '.$row['barcode'].'

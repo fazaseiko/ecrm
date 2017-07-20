@@ -8,7 +8,7 @@ error_reporting(0);
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Shop Manager | Stock List</title>
+        <title>Shop Manager | Funder List</title>
         <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="../css/theme.css" rel="stylesheet">
@@ -39,13 +39,13 @@ include 'sidemenu.php';
                         <div class="content">
                             <div class="module">
                                 <div class="module-head">
-                                    <h3>Stock List</h3>
+                                    <h3>Dealer List</h3>
                                 </div>
                                 <div class="module-body table">
                                  <?php
 								 include '../config/db_config.php';
 								 
-								 $sql = "SELECT * FROM products WHERE shop_id = '$SEshopno'";
+								 $sql = "SELECT * FROM funder ";
                                  $result = $conn->query($sql);
 
                                  if ($result->num_rows > 0) {
@@ -55,22 +55,12 @@ include 'sidemenu.php';
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    Date
+                                                    Name
                                                 </th>
                                                 <th>
-                                                    Product Name
+                                                    Address
                                                 </th>
-                                                <th>
-                                                    Quantity                                                </th>
-												<th>
-                                                    Serial No.
-                                                </th>
-												<th>
-                                                    Person In Charge
-                                                </th>
-												<th>
-                                                    Time
-                                                </th>
+                                                
                                                 <th>
                                                     Option
                                                 </th>
@@ -84,31 +74,19 @@ include 'sidemenu.php';
                                print '<tr class="odd gradeX">
                                                 
                                                 <td>
-                                                    '.$row['date'].'
+                                                    '.$row['funder_name'].'
                                                 </td>
                                                 <td>
-                                                    '.$row['item_description'].'
+                                                    '.$row['funder_address1'].'
                                                 </td>
-												<td>
-                                                    '.$row['open_stock'].'
-                                                </td>
-												<td>
-                                                    '.$row['barcode'].'
-                                                </td>
-												<td>
-                                                    '.$row['person_in_charge'].'
-                                                </td>
-												<td>
-                                                    '.$row['time'].'
-                                                </td>
-                                                
+												                                                
                                                 <td class="center">
                                               	<div class="controls">
 												<div class="dropdown">
 													<a class="dropdown-toggle btn" data-toggle="dropdown" href="#">Option <i class="icon-caret-down"></i></a>
 													<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-														<li><a href="action/edit_send2.php?ref='.$row['product_id'].'">Edit</a></li>														
-														<li><a '; ?> onclick="return confirm('Are you sure you want to delete product <?php echo $row['name']; ?> ?')" <?php print 'href="action/delete_product.php?ref='.$row['product_id'].'">Delete</a></li>
+														<li><a href="edit_funder.php?id='.$row['funder_id'].'">Edit</a></li>														
+														<li><a '; ?> onclick="return confirm('Are you sure you want to delete funder <?php echo $row['funder_name']; ?> ?')" <?php print 'href="delete_funder.php?id='.$row['funder_id'].'">Delete</a></li>
 														<!--<li><a href="action/explore_send.php?ref='.$row['product_id'].'">Explore</a></li>-->
 														
 													</ul>

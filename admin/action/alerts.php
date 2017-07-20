@@ -9,7 +9,7 @@ $today = date('d');
 $month = date('m');
 $yr = date('Y');
 
-$sql = "SELECT * FROM products WHERE shop_id = '$SEshopno' and stock_level >= current_stock";
+$sql = "SELECT * FROM products WHERE current_stock <= 5";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -41,7 +41,7 @@ $conn->close();
 
 include '../config/db_config.php';
 
-$sql = "SELECT * FROM products WHERE shop_id = '$SEshopno'";
+$sql = "SELECT * FROM products ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -57,7 +57,7 @@ $conn->close();
 
 include '../config/db_config.php';
 
-$sql = "SELECT * FROM patients WHERE shop = '$SEshopno'";
+$sql = "SELECT * FROM patient ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

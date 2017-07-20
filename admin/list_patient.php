@@ -8,7 +8,7 @@ error_reporting(0);
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eartistic System | My Patients</title>
+        <title>Shop Manager | Patient List</title>
         <link type="text/css" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="../css/theme.css" rel="stylesheet">
@@ -19,8 +19,9 @@ error_reporting(0);
     </head>
     <body>
         <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <?php
+            <div class="navbar-inner"> 
+            
+            <?php
 include 'header.php';
 ?>
             </div>
@@ -38,14 +39,13 @@ include 'sidemenu.php';
                         <div class="content">
                             <div class="module">
                                 <div class="module-head">
-                                    <h3>
-                                        Registered Patients</h3>
+                                    <h3>Patient List</h3>
                                 </div>
                                 <div class="module-body table">
                                  <?php
 								 include '../config/db_config.php';
 								 
-								 $sql = "SELECT * FROM patients WHERE shop = '$SEshopno'";
+								 $sql = "SELECT * FROM patient ";
                                  $result = $conn->query($sql);
 
                                  if ($result->num_rows > 0) {
@@ -54,65 +54,41 @@ include 'sidemenu.php';
                                         width="100%">
                                         <thead>
                                             <tr>
-                                                <!--<th>
-                                                    User ID
-                                                </th>-->
                                                 <th>
-                                                    Full Name
+                                                    Name
                                                 </th>
                                                 <th>
-                                                    Hospital/Walk in
+                                                    IC Number
                                                 </th>
-                                                <th>
-                                                    Gender
-                                                </th>
-												<th>
-                                                    Phone
-                                                </th>
-												<th>
-                                                   Result
-                                                </th>
+                                                
                                                 <th>
                                                     Option
                                                 </th>
+												
                                             </tr>
                                         </thead>
                                         <tbody>';
     
                                   while($row = $result->fetch_assoc()) {
-									  $scanned = $row['scanned'];
+									  $exdate = ''.$row['expire_date'].'-'.$row['expire_month'].'-'.$row['expire_year'].'';
                                print '<tr class="odd gradeX">
-                                                <!--<td>
-                                                    '.$row['patient_id'].'
-                                                </td>-->
+                                                
                                                 <td>
-                                                    '.$row['fullname'].'
+                                                    '.$row['patient_name'].'
                                                 </td>
                                                 <td>
-                                                    '.$row['hospital'].'
+                                                    '.$row['patient_ic'].'
                                                 </td>
+												                                                
                                                 <td class="center">
-                                                    '.$row['gender'] .'
-                                                </td>
-												<td>
-                                                    '.$row['ic'].'
-                                                </td>
-												<td>';
-												if ($scanned == null){
-												print'<img src="../images/'.$row['gender'].'.png" width="60">';
-												}else{
-												print'<img src="data:image/png;base64,'.base64_encode($scanned).'">';
-												}
-                                                print '
-                                                </td>
-                                                <td class="center">
-                                               <div class="control-group">
-											<div class="controls">
+                                              	<div class="controls">
 												<div class="dropdown">
 													<a class="dropdown-toggle btn" data-toggle="dropdown" href="#">Option <i class="icon-caret-down"></i></a>
 													<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-														<li><a href="action/editpatient_send.php?ref='.$row['patient_id'].'">Edit User</a></li>
-														<li><a '; ?> onclick="return confirm('Are you sure you want to delete user <?php echo $row['fullname']; ?> ?')" <?php print 'href="action/delete_patient.php?ref='.$row['patient_id'].'">Delete User</a></li>
+														<li><a href="edit_patient.php?id='.$row['patient_id'].'">Edit</a></li>														
+														<li><a '; ?> onclick="return confirm('Are you sure you want to delete product <?php echo $row['patient_name']; ?> ?')" <?php print 'href="delete_patient.php?id='.$row['patient_id'].'">Delete</a></li>
+														<!--<li><a href="action/explore_send.php?id='.$row['product_id'].'">Explore</a></li>-->
+														
 													</ul>
 												</div>
 											</div>
@@ -121,12 +97,12 @@ include 'sidemenu.php';
                                             </tr>';
                                     }
                                     } else {
-                                     print '
+                                    print '
 									<div class="module-body">
                                  <div class="alert alert-success">
 										<button type="button" class="close" data-dismiss="alert">×</button>
-										<h3 style="color:green">No User Found!</h3>
-										All registered users will be shown here.
+										<h3 style="color:green">No Product Found!</h3>
+										All products you register will be shown here.
 									</div>
 									</div>';
                                        }

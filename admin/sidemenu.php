@@ -1,4 +1,4 @@
-                    <div class="span3">
+                    <div class="span2">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
                                 <li class="active"><a href="./"><i class="menu-icon icon-dashboard"></i>Dashboard
@@ -7,6 +7,7 @@
                                 </li>
                                 <li><a href="list_stock.php"><i class="menu-icon icon-shopping-cart"></i>Stock List</a></li>
                                 <li><a href="product_categories.php"><em class="menu-icon icon-user"></em> Person In Charge</a></li>
+                                <li><a href="new_sale.php"><em class="menu-icon icon-user"></em> New Sale</a></li>
                                 <?php /*?><li><a href="barcodes.php"><i class="menu-icon icon-barcode"></i>Generate Barcodes</a></li><?php */?>
                             </ul>   
                             
@@ -27,7 +28,7 @@
                             
                             <ul class="widget widget-menu unstyled">
                               <li><a href="new_patient.php"><em class="menu-icon icon-group"></em> New Patient</a></li>
-                              <li><a href="my_patients.php"><em class="menu-icon icon-group"></em> Patient List</a></li>
+                              <li><a href="list_patient.php"><em class="menu-icon icon-group"></em> Patient List</a></li>
                             </ul>
                                                         			
 							<?php /*?><ul class="widget widget-menu unstyled">
